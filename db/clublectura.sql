@@ -31,12 +31,54 @@ CREATE TABLE libros
   , autor               VARCHAR(100)        NOT NULL
   , editorial           VARCHAR(255)        NOT NULL
   , isbn                VARCHAR(13)         NOT NULL
-  , fecha_publicación   DATE                NOT NULL
+  , fecha_publicacion   DATE                NOT NULL
+  , descripcion         TEXT
 );
 
 DROP TABLE IF EXISTS peliculas CASCADE;
 
 CREATE TABLE peliculas
 (
+    id                  BIGSERIAL           PRIMARY KEY
+  , titulo              VARCHAR(255)        NOT NULL
+  , director            VARCHAR(255)        NOT NULL
+  , guionistas          VARCHAR(255)        NOT NULL
+  , productores         VARCHAR(255)        NOT NULL
+  , principales_actores TEXT
+  , descripcion         TEXT
+);
 
+DROP TABLE IF EXISTS seleccion CASCADE;
+
+CREATE TABLE seleccion
+(
+    usuario_id          BIGINT              NOT NULL
+  , libro_id            BIGINT              NOT NULL
+  , PRIMARY KEY(usuario_id, libro_id)
+);
+
+DROP TABLE IF EXISTS criticas CASCADE;
+
+CREATE TABLE criticas
+(
+    id                  BIGSERIAL           PRIMARY KEY
+  , created_at          DATE                NOT NULL
+                                            DEFAULT CURRENT_TIMESTAMP
+  , texto               TEXT                NOT NULL
+  , usuario_id          BIGINT              NOT NULL
+                                            REFERENCES usuarios(id)
+                                            ON DELETE SET NULL
+                                            ON UPDATE CASCADE
+  , libro_id            BIGINT              REFERENCES libros(id)
+                                            ON DELETE SET NULL
+                                            ON UPDATE CASCADE
+  , pelicula_id         BIGINT              REFERENCES peliculas(id)
+                                            ON DELETE SET NULL
+                                            ON UPDATE CASCADE
+  , CONSTRAINT uq_usuario_libro  UNIQUE (usuario_id, libro_id)
+  , CONSTRAINT uq_usuario_pelicula  UNIQUE (usuario_id, pelicula_id)
+  , CONSTRAINT ck_alternar_valores_nulos CHECK (
+        (libro_id IS NOT NULL AND pelicula_id IS NULL)
+        OR
+        (libro_id IS NULL AND pelicula_id IS NOT NULL)
 );
