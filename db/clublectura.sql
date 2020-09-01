@@ -82,3 +82,33 @@ CREATE TABLE criticas
         OR
         (libro_id IS NULL AND pelicula_id IS NOT NULL)
 );
+
+DROP TABLE IF EXISTS comentarios CASCADE;
+
+CREATE TABLE comentarios
+(
+    id                  BIGSERIAL           PRIMARY KEY
+  , created_at          TIMESTAMPTZ(0)      NOT NULL
+                                            DEFAULT CURRENT_TIMESTAMP
+  , texto               TEXT                NOT NULL
+  , usuario_id          BIGINT              REFERENCES usuarios(id)
+                                            ON DELETE SET NULL
+                                            ON UPDATE CASCADE
+  , pelicula_id         BIGINT              NOT NULL
+                                            REFERENCES peliculas(id)
+                                            ON DELETE CASCADE
+                                            ON UPDATE CASCADE
+  , libro_id            BIGINT              NOT NULL
+                                            REFERENCES libros(id)
+                                            ON DELETE CASCADE
+                                            ON UPDATE CASCADE
+  , CONSTRAINT uq_usuario_libro  UNIQUE (usuario_id, libro_id)
+  , CONSTRAINT uq_usuario_pelicula  UNIQUE (usuario_id, pelicula_id)
+  , CONSTRAINT ck_alternar_valores_nulos CHECK (
+        (libro_id IS NOT NULL AND pelicula_id IS NULL)
+        OR
+        (libro_id IS NULL AND pelicula_id IS NOT NULL)
+);
+
+--   INSERTS   --
+
