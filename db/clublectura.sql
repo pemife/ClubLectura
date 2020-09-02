@@ -34,7 +34,7 @@ CREATE TABLE libros
   , fecha_publicacion   DATE
   , fecha_1a_edicion    DATE
   , descripcion         TEXT
-  , n_paginas           NUMBER(4)
+  , n_paginas           NUMERIC(4)
 );
 
 DROP TABLE IF EXISTS peliculas CASCADE;
@@ -79,10 +79,11 @@ CREATE TABLE criticas
                                             ON UPDATE CASCADE
   , CONSTRAINT uq_usuario_libro  UNIQUE (usuario_id, libro_id)
   , CONSTRAINT uq_usuario_pelicula  UNIQUE (usuario_id, pelicula_id)
-  , CONSTRAINT ck_alternar_valores_nulos CHECK (
-        (libro_id IS NOT NULL AND pelicula_id IS NULL)
-        OR
-        (libro_id IS NULL AND pelicula_id IS NOT NULL)
+  , CONSTRAINT ck_alternar_valores_nulos_criticas CHECK (
+            (libro_id IS NOT NULL AND pelicula_id IS NULL)
+            OR
+            (libro_id IS NULL AND pelicula_id IS NOT NULL)
+    )
 );
 
 DROP TABLE IF EXISTS comentarios CASCADE;
@@ -104,12 +105,11 @@ CREATE TABLE comentarios
                                             REFERENCES libros(id)
                                             ON DELETE CASCADE
                                             ON UPDATE CASCADE
-  , CONSTRAINT uq_usuario_libro  UNIQUE (usuario_id, libro_id)
-  , CONSTRAINT uq_usuario_pelicula  UNIQUE (usuario_id, pelicula_id)
-  , CONSTRAINT ck_alternar_valores_nulos CHECK (
+  , CONSTRAINT ck_alternar_valores_nulos_comentarios CHECK (
         (libro_id IS NOT NULL AND pelicula_id IS NULL)
         OR
         (libro_id IS NULL AND pelicula_id IS NOT NULL)
+    )
 );
 
 --   INSERTS   --
@@ -130,7 +130,7 @@ VALUES ('La historia interminable', 'Michael Ende', 'Santillana', 9788491220787,
 
 INSERT INTO peliculas (titulo, director, guionistas, productores, principales_actores, descripcion)
 VALUES ('La historia interminable', 'Wolfgang Petersen', 'Herman Weigel y Wolfgang Petersen', null, 'Noah Hathaway, Barret Oliver, Tami Stronach, etc.', null),
-('El retrato de Dorian Gray', 'Albert Lewin', 'Albert Lewin', null, 'George Sanders, Hurd Hatfield, Donna Reed, etc.', null)
+('El retrato de Dorian Gray', 'Albert Lewin', 'Albert Lewin', null, 'George Sanders, Hurd Hatfield, Donna Reed, etc.', null),
 ('Un mundo de fantasía', 'Mel Stuart', 'Roald Dahl', null, 'Gene Wilder, Jack Albertson, Peter Ostrum, etc.', null),
-('Charlie y la fábrica de chocolate', 'Tim Burton', 'John August', null, 'Johnny Depp, Freddie Highmore, David Kelly, etc.', null)
+('Charlie y la fábrica de chocolate', 'Tim Burton', 'John August', null, 'Johnny Depp, Freddie Highmore, David Kelly, etc.', null),
 ('El guardián invisible', 'Fernando González Molina', 'Luiso Berdejo', null, 'Marta Etura, Elvira Mínguez, Nene, etc.', null);
