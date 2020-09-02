@@ -29,10 +29,12 @@ CREATE TABLE libros
     id                  BIGSERIAL           PRIMARY KEY
   , titulo              VARCHAR(255)        NOT NULL
   , autor               VARCHAR(100)        NOT NULL
-  , editorial           VARCHAR(255)        NOT NULL
-  , isbn                VARCHAR(13)         NOT NULL
-  , fecha_publicacion   DATE                NOT NULL
+  , editorial           VARCHAR(255)
+  , isbn                NUMERIC(13)         NOT NULL
+  , fecha_publicacion   DATE
+  , fecha_1a_edicion    DATE
   , descripcion         TEXT
+  , n_paginas           NUMBER(4)
 );
 
 DROP TABLE IF EXISTS peliculas CASCADE;
@@ -43,7 +45,7 @@ CREATE TABLE peliculas
   , titulo              VARCHAR(255)        NOT NULL
   , director            VARCHAR(255)        NOT NULL
   , guionistas          VARCHAR(255)        NOT NULL
-  , productores         VARCHAR(255)        NOT NULL
+  , productores         VARCHAR(255)
   , principales_actores TEXT
   , descripcion         TEXT
 );
@@ -112,3 +114,21 @@ CREATE TABLE comentarios
 
 --   INSERTS   --
 
+INSERT INTO usuarios (nombre, password, email, fechanac)
+VALUES ('admin', crypt('hnmpl', gen_salt('bf', 10)), 'gamesandfriends2@gmail.com', '1987-01-01'),
+('pepe', crypt('pepe', gen_salt('bf', 10)), 'jose.millan@iesdonana.org', '1995-12-03'),
+('cristina', crypt('cristina', gen_salt('bf', 10)), 'crimaroli90@gmail.com', '1990-11-16');
+
+INSERT INTO libros (titulo, autor, editorial, isbn, fecha_publicacion, fecha_1a_edicion, descripcion, n_paginas)
+VALUES ('La historia interminable', 'Michael Ende', 'Santillana', 9788491220787, '2016-1-1', '1979-1-1', null, 256),
+('El retrato de Dorian Gray', 'Oscar Wilde', 'Siruela', 9788417860134, '2019-1-1', '1890-6-20', null, 280),
+('Dorian Gray', 'Enrique Corominas', 'Diabolo', 9788415153498)
+('Charlie y la fábrica de chocolate', 'Roald Dahl', 'Santillana', 9788491221166, '2016-1-1', '1964-1-1', null, 240),
+('El guardián invisible', 'Dolores Redondo', 'Destino', 9788423350995, '2016-1-1', '2012-1-1', null, 432),
+('Stardust', 'Neil Gaiman', 'Rocabolsillo', 9788496940888, '2010-1-1', '1999-2-1', null, 228);
+
+INSERT INTO peliculas (titulo, director, guionistas, productores, principales_actores, descripcion)
+VALUES ('La historia interminable', 'Wolfgang Petersen', 'Herman Weigel y Wolfgang Petersen', null, 'Noah Hathaway, Barret Oliver, Tami Stronach, etc.', null),
+('El retrato de Dorian Gray', 'Albert Lewin', 'Albert Lewin', null, 'George Sanders, Hurd Hatfield, Donna Reed, etc.', null)
+
+;
