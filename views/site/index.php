@@ -3,15 +3,19 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
+$css = <<<CSS
+    .portada {
+        width: 30%;
+        height: 30%;
+    }
+CSS;
+$this->registerCSS($css);
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <img class="portada" src="https://i.ibb.co/HgmxpMB/aurin.png" alt="aurin">
+        <p class="lead mt-2 font-weight-bold">Bienvenido a nuestro club de lectura</p>
     </div>
 
     <div class="body-content">
