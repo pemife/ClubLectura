@@ -54,7 +54,8 @@ DROP TABLE IF EXISTS seleccion CASCADE;
 
 CREATE TABLE seleccion
 (
-    usuario_id          BIGINT              NOT NULL
+    orden               NUMERIC(2)          NOT NULL
+  , usuario_id          BIGINT              NOT NULL
   , libro_id            BIGINT              NOT NULL
   , PRIMARY KEY(usuario_id, libro_id)
 );
