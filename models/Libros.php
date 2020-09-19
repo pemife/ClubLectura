@@ -71,7 +71,7 @@ class Libros extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::className(), ['libro_id' => 'id'])->inverseOf('libro');
+        return $this->hasMany(Comentarios::class, ['libro_id' => 'id'])->inverseOf('libro');
     }
 
     /**
@@ -81,7 +81,7 @@ class Libros extends \yii\db\ActiveRecord
      */
     public function getCriticas()
     {
-        return $this->hasMany(Criticas::className(), ['libro_id' => 'id'])->inverseOf('libro');
+        return $this->hasMany(Criticas::class, ['libro_id' => 'id'])->inverseOf('libro');
     }
 
     /**
@@ -91,6 +91,6 @@ class Libros extends \yii\db\ActiveRecord
      */
     public function getUsuarios()
     {
-        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('criticas', ['libro_id' => 'id']);
+        return $this->hasMany(Usuarios::class, ['id' => 'usuario_id'])->viaTable('criticas', ['libro_id' => 'id']);
     }
 }

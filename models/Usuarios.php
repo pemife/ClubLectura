@@ -86,7 +86,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasMany(Comentarios::class, ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 
     /**
@@ -96,7 +96,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getCriticas()
     {
-        return $this->hasMany(Criticas::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasMany(Criticas::class, ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 
     /**
@@ -106,7 +106,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getLibros()
     {
-        return $this->hasMany(Libros::className(), ['id' => 'libro_id'])->viaTable('seleccion', ['usuario_id' => 'id']);
+        return $this->hasMany(Libros::class, ['id' => 'libro_id'])->viaTable('seleccion', ['usuario_id' => 'id']);
     }
 
     /**
@@ -116,7 +116,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getPeliculas()
     {
-        return $this->hasMany(Peliculas::className(), ['id' => 'pelicula_id'])->viaTable('criticas', ['usuario_id' => 'id']);
+        return $this->hasMany(Peliculas::class, ['id' => 'pelicula_id'])->viaTable('criticas', ['usuario_id' => 'id']);
     }
 
     /**

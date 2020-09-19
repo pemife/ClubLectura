@@ -64,7 +64,7 @@ class Peliculas extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::className(), ['pelicula_id' => 'id'])->inverseOf('pelicula');
+        return $this->hasMany(Comentarios::class, ['pelicula_id' => 'id'])->inverseOf('pelicula');
     }
 
     /**
@@ -74,7 +74,7 @@ class Peliculas extends \yii\db\ActiveRecord
      */
     public function getCriticas()
     {
-        return $this->hasMany(Criticas::className(), ['pelicula_id' => 'id'])->inverseOf('pelicula');
+        return $this->hasMany(Criticas::class, ['pelicula_id' => 'id'])->inverseOf('pelicula');
     }
 
     /**
@@ -84,6 +84,6 @@ class Peliculas extends \yii\db\ActiveRecord
      */
     public function getUsuarios()
     {
-        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('criticas', ['pelicula_id' => 'id']);
+        return $this->hasMany(Usuarios::class, ['id' => 'usuario_id'])->viaTable('criticas', ['pelicula_id' => 'id']);
     }
 }

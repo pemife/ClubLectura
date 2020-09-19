@@ -39,9 +39,9 @@ class Comentarios extends \yii\db\ActiveRecord
             [['texto'], 'string'],
             [['usuario_id', 'pelicula_id', 'libro_id'], 'default', 'value' => null],
             [['usuario_id', 'pelicula_id', 'libro_id'], 'integer'],
-            [['libro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Libros::className(), 'targetAttribute' => ['libro_id' => 'id']],
-            [['pelicula_id'], 'exist', 'skipOnError' => true, 'targetClass' => Peliculas::className(), 'targetAttribute' => ['pelicula_id' => 'id']],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['libro_id'], 'exist', 'skipOnError' => true, 'targetClass' => Libros::class, 'targetAttribute' => ['libro_id' => 'id']],
+            [['pelicula_id'], 'exist', 'skipOnError' => true, 'targetClass' => Peliculas::class, 'targetAttribute' => ['pelicula_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
 
@@ -67,7 +67,7 @@ class Comentarios extends \yii\db\ActiveRecord
      */
     public function getLibro()
     {
-        return $this->hasOne(Libros::className(), ['id' => 'libro_id'])->inverseOf('comentarios');
+        return $this->hasOne(Libros::class, ['id' => 'libro_id'])->inverseOf('comentarios');
     }
 
     /**
@@ -77,7 +77,7 @@ class Comentarios extends \yii\db\ActiveRecord
      */
     public function getPelicula()
     {
-        return $this->hasOne(Peliculas::className(), ['id' => 'pelicula_id'])->inverseOf('comentarios');
+        return $this->hasOne(Peliculas::class, ['id' => 'pelicula_id'])->inverseOf('comentarios');
     }
 
     /**
@@ -87,6 +87,6 @@ class Comentarios extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('comentarios');
+        return $this->hasOne(Usuarios::class, ['id' => 'usuario_id'])->inverseOf('comentarios');
     }
 }
