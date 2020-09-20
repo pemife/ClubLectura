@@ -29,13 +29,13 @@ class LibrosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['seleccion', 'create', 'update', 'delete'],
+                'only' => ['create', 'update', 'delete'],
                 'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['seleccion'],
-                        'roles' => ['@'],
-                    ],
+                    // [
+                    //     'allow' => true,
+                    //     'actions' => ['seleccion'],
+                    //     'roles' => ['@'],
+                    // ],
                     [
                         'allow' => true,
                         'actions' => ['create', 'update', 'delete'],
