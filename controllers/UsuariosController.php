@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Libros;
 use Yii;
 use app\models\Usuarios;
 use yii\data\ActiveDataProvider;
@@ -107,6 +108,25 @@ class UsuariosController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Función que te lleva a la vista de los libros propuestos por el usuario
+     * para poder asi visualizarla/modificarla.
+     *
+     * @param Integer $u    Id del usuario del que queremos ver la lista
+     * @return mixed
+     */
+    public function actionMisLibros($u)
+    {
+        // TODO
+        $dataProvider = new ActiveDataProvider([
+            'query' => Libros::find()->where(['usuario_id' => $u]),
+        ]);
+
+        return $this->render('', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

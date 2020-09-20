@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Libros;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,9 +22,27 @@ class LibrosController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['seleccion', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['seleccion'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'update', 'delete'],
+                        'matchCallback' => function ($rule, $action) {
+                            //TODO
+                        }
+                    ]
                 ],
             ],
         ];
@@ -107,6 +126,16 @@ class LibrosController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Te lleva a la lista de libros propuestos
+     *
+     * @return mixed
+     */
+    public function actionSeleccion()
+    {
+        return $this->render('seleccion');
     }
 
     /**
