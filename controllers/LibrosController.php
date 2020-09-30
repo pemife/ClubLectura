@@ -31,16 +31,16 @@ class LibrosController extends Controller
                 'class' => AccessControl::class,
                 'only' => ['create', 'update', 'delete'],
                 'rules' => [
-                    // [
-                    //     'allow' => true,
-                    //     'actions' => ['seleccion'],
-                    //     'roles' => ['@'],
-                    // ],
                     [
                         'allow' => true,
-                        'actions' => ['create', 'update', 'delete'],
+                        'actions' => ['create'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update', 'delete'],
                         'matchCallback' => function ($rule, $action) {
-                            //TODO
+                            return true;
                         }
                     ]
                 ],
@@ -83,15 +83,17 @@ class LibrosController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Libros();
+        // $model = new Libros();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        // return $this->render('create', [
+        //     'model' => $model,
+        // ]);
+
+        return $this->render('pruebas');
     }
 
     /**

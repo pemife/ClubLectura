@@ -113,6 +113,22 @@ CREATE TABLE comentarios
     )
 );
 
+DROP TABLE IF EXISTS libro_usuario CASCADE;
+
+CREATE TABLE libro_usuario
+(
+    usuario_id      BIGINT          NOT NULL
+                                    REFERENCES usuarios(id)
+                                    ON DELETE CASCADE
+                                    ON UPDATE CASCADE
+  , libro_id        BIGINT          NOT NULL
+                                    REFERENCES libros(id)
+                                    ON DELETE CASCADE
+                                    ON UPDATE CASCADE
+  , created_at      TIMESTAMP       NOT NULL
+                                    DEFAULT CURRENT_TIMESTAMP
+);
+
 --   INSERTS   --
 
 INSERT INTO usuarios (nombre, password, email, fechanac)
