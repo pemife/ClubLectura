@@ -1,19 +1,17 @@
 <?php
 
-
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-use yii\bootstrap4\Html;
 
 $this->title = 'BookFinder';
 $this->params['breadcrumbs'][] = $this->title;
 
 $js = <<<SCRIPT
-
-
 // ESTO ES LO QUE QUIERO HACER PERO NO FUNCIONA CON AJAX, A VER SI PUEDO CON PHP
+
+// https://stackoverflow.com/questions/18349130/how-to-parse-html-in-php
 
 // $('#textoBusqueda').keyup(function(){
 //     var textoInput = this.value;
@@ -41,7 +39,6 @@ $js = <<<SCRIPT
 //         error: function() {alert('a fallao')}
 //     });
 // }
-
 SCRIPT;
 
 $this->registerJs($js);
@@ -59,7 +56,7 @@ $this->registerJs($js);
 
     <div class="col-md-12 text-center" id="contenidoRespuesta">
     
-        <p>Escribe algo crack</p>
+        <p>Escribe al menos 3 caracteres</p>
     
     </div>
 
