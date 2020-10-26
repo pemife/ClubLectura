@@ -403,7 +403,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Información                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [45](https://github.com/pemife/clublectura/issues/45) |
 
 | **R46**     | **Proposición de libros**         |
@@ -421,7 +421,7 @@
 | **Prioridad**   | Opcional           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Difícil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [47](https://github.com/pemife/clublectura/issues/47) |
 
 | **R48**     | **Barra de búsqueda**         |
@@ -430,7 +430,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [48](https://github.com/pemife/clublectura/issues/48) |
 
 | **R49**     | **Correo con evento**         |
@@ -466,7 +466,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [52](https://github.com/pemife/clublectura/issues/52) |
 
 | **R53**     | **Opinar sobre libros**         |
@@ -475,7 +475,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [53](https://github.com/pemife/clublectura/issues/53) |
 
 | **R54**     | **Bienvenida**         |
@@ -502,7 +502,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [56](https://github.com/pemife/clublectura/issues/56) |
 
 | **R57**     | **Listas de usuarios**         |
@@ -511,7 +511,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [57](https://github.com/pemife/clublectura/issues/57) |
 
 | **R58**     | **Registros por invitación**         |
@@ -529,7 +529,7 @@
 | **Prioridad**   | Opcional           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [59](https://github.com/pemife/clublectura/issues/59) |
 
 | **R60**     | **Recompensas por nivel**         |
@@ -538,7 +538,7 @@
 | **Prioridad**   | Opcional           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [60](https://github.com/pemife/clublectura/issues/60) |
 
 | **R61**     | **Compartir en redes sociales**         |
@@ -547,7 +547,7 @@
 | **Prioridad**   | Opcional           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [61](https://github.com/pemife/clublectura/issues/61) |
 
 | **R62**     | **Selección programada**         |
@@ -556,7 +556,7 @@
 | **Prioridad**   | Opcional           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Media         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [62](https://github.com/pemife/clublectura/issues/62) |
 
 | **R63**     | **Rotación de usuarios**         |
@@ -565,7 +565,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [63](https://github.com/pemife/clublectura/issues/63) |
 
 | **R64**     | **Participación selección**         |
@@ -574,7 +574,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [64](https://github.com/pemife/clublectura/issues/64) |
 
 | **R65**     | **Recordatorio favoritos**         |
@@ -583,7 +583,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [65](https://github.com/pemife/clublectura/issues/65) |
 
 | **R66**     | **Email admin aceptar propuesta libro/película**         |
@@ -619,7 +619,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [69](https://github.com/pemife/clublectura/issues/69) |
 
 | **R70**     | **Cuenta eliminada**         |
@@ -628,7 +628,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v2             |
 | **Incidencia**  | [70](https://github.com/pemife/clublectura/issues/70) |
 
 | **R71**     | **Búsqueda de usuario**         |
@@ -637,7 +637,7 @@
 | **Prioridad**   | Importante           |
 | **Tipo**        | Funcional                |
 | **Complejidad** | Fácil         |
-| **Entrega**     | v1             |
+| **Entrega**     | v3             |
 | **Incidencia**  | [71](https://github.com/pemife/clublectura/issues/71) |
 
 
@@ -689,30 +689,30 @@
 | (**R42**) Selección de libros | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [42](https://github.com/pemife/clublectura/issues/42) |
 | (**R43**) Página de libro | Importante | Información | Fácil | v1 | | **Incidencia**  | [43](https://github.com/pemife/clublectura/issues/43) |
 | (**R44**) Página de película | Importante | Información | Fácil | v1 | | **Incidencia**  | [44](https://github.com/pemife/clublectura/issues/44) |
-| (**R45**) Calendario de eventos | Importante | Información | Fácil | v1 | | **Incidencia**  | [45](https://github.com/pemife/clublectura/issues/45) |
+| (**R45**) Calendario de eventos | Importante | Información | Fácil | v2 | | **Incidencia**  | [45](https://github.com/pemife/clublectura/issues/45) |
 | (**R46**) Proposición de libros | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [46](https://github.com/pemife/clublectura/issues/46) |
-| (**R47**) “BookFinder” | Opcional | Funcional | Difícil | v1 | | **Incidencia**  | [47](https://github.com/pemife/clublectura/issues/47) |
-| (**R48**) Barra de búsqueda | Importante | Funcional | Media | v1 | | **Incidencia**  | [48](https://github.com/pemife/clublectura/issues/48) |
+| (**R47**) “BookFinder” | Opcional | Funcional | Difícil | v3 | | **Incidencia**  | [47](https://github.com/pemife/clublectura/issues/47) |
+| (**R48**) Barra de búsqueda | Importante | Funcional | Media | v3 | | **Incidencia**  | [48](https://github.com/pemife/clublectura/issues/48) |
 | (**R49**) Correo con evento | Opcional | Funcional | Fácil | v1 | | **Incidencia**  | [49](https://github.com/pemife/clublectura/issues/49) |
 | (**R50**) Perfil usuario | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [50](https://github.com/pemife/clublectura/issues/50) |
 | (**R51**) Confirmación de registro | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [51](https://github.com/pemife/clublectura/issues/51) |
-| (**R52**) Correo de novedades | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [52](https://github.com/pemife/clublectura/issues/52) |
-| (**R53**) Opinar sobre libros | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [53](https://github.com/pemife/clublectura/issues/53) |
+| (**R52**) Correo de novedades | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [52](https://github.com/pemife/clublectura/issues/52) |
+| (**R53**) Opinar sobre libros | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [53](https://github.com/pemife/clublectura/issues/53) |
 | (**R54**) Bienvenida | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [54](https://github.com/pemife/clublectura/issues/54) |
 | (**R55**) Control de permisos | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [55](https://github.com/pemife/clublectura/issues/55) |
-| (**R56**) Marcas de estado | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [56](https://github.com/pemife/clublectura/issues/56) |
-| (**R57**) Listas de usuarios | Importante | Funcional | Media | v1 | | **Incidencia**  | [57](https://github.com/pemife/clublectura/issues/57) |
+| (**R56**) Marcas de estado | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [56](https://github.com/pemife/clublectura/issues/56) |
+| (**R57**) Listas de usuarios | Importante | Funcional | Media | v2 | | **Incidencia**  | [57](https://github.com/pemife/clublectura/issues/57) |
 | (**R58**) Registros por invitación | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [58](https://github.com/pemife/clublectura/issues/58) |
-| (**R59**) Niveles de usuario | Opcional | Funcional | Media | v1 | | **Incidencia**  | [59](https://github.com/pemife/clublectura/issues/59) |
-| (**R60**) Recompensas por nivel | Opcional | Funcional | Media | v1 | | **Incidencia**  | [60](https://github.com/pemife/clublectura/issues/60) |
-| (**R61**) Compartir en redes sociales | Opcional | Funcional | Fácil | v1 | | **Incidencia**  | [61](https://github.com/pemife/clublectura/issues/61) |
-| (**R62**) Selección programada | Opcional | Funcional | Media | v1 | | **Incidencia**  | [62](https://github.com/pemife/clublectura/issues/62) |
-| (**R63**) Rotación de usuarios | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [63](https://github.com/pemife/clublectura/issues/63) |
-| (**R64**) Participación selección | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [64](https://github.com/pemife/clublectura/issues/64) |
-| (**R65**) Recordatorio favoritos | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [65](https://github.com/pemife/clublectura/issues/65) |
+| (**R59**) Niveles de usuario | Opcional | Funcional | Media | v3 | | **Incidencia**  | [59](https://github.com/pemife/clublectura/issues/59) |
+| (**R60**) Recompensas por nivel | Opcional | Funcional | Media | v3 | | **Incidencia**  | [60](https://github.com/pemife/clublectura/issues/60) |
+| (**R61**) Compartir en redes sociales | Opcional | Funcional | Fácil | v3 | | **Incidencia**  | [61](https://github.com/pemife/clublectura/issues/61) |
+| (**R62**) Selección programada | Opcional | Funcional | Media | v3 | | **Incidencia**  | [62](https://github.com/pemife/clublectura/issues/62) |
+| (**R63**) Rotación de usuarios | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [63](https://github.com/pemife/clublectura/issues/63) |
+| (**R64**) Participación selección | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [64](https://github.com/pemife/clublectura/issues/64) |
+| (**R65**) Recordatorio favoritos | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [65](https://github.com/pemife/clublectura/issues/65) |
 | (**R66**) Email admin aceptar propuesta libro/película | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [66](https://github.com/pemife/clublectura/issues/66) |
 | (**R67**) Invitaciones registro | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [67](https://github.com/pemife/clublectura/issues/67) |
 | (**R68**) Validez de invitación | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [68](https://github.com/pemife/clublectura/issues/68) |
-| (**R69**) Eliminar cuenta | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [69](https://github.com/pemife/clublectura/issues/69) |
-| (**R70**) Cuenta eliminada | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [70](https://github.com/pemife/clublectura/issues/70) |
-| (**R71**) Búsqueda de usuario | Importante | Funcional | Fácil | v1 | | **Incidencia**  | [71](https://github.com/pemife/clublectura/issues/71) |
+| (**R69**) Eliminar cuenta | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [69](https://github.com/pemife/clublectura/issues/69) |
+| (**R70**) Cuenta eliminada | Importante | Funcional | Fácil | v2 | | **Incidencia**  | [70](https://github.com/pemife/clublectura/issues/70) |
+| (**R71**) Búsqueda de usuario | Importante | Funcional | Fácil | v3 | | **Incidencia**  | [71](https://github.com/pemife/clublectura/issues/71) |
