@@ -20,6 +20,7 @@ use Yii;
  * @property Comentarios[] $comentarios
  * @property Criticas[] $criticas
  * @property Usuarios[] $usuarios
+ * @property LibroUsuario[] $libroUsuarios
  */
 class Libros extends \yii\db\ActiveRecord
 {

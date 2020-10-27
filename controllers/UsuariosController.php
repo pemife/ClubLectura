@@ -6,6 +6,7 @@ use app\models\Libros;
 use Yii;
 use app\models\Usuarios;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -120,11 +121,11 @@ class UsuariosController extends Controller
     public function actionMisLibros($u)
     {
         // TODO
-        $dataProvider = new ActiveDataProvider([
-            'query' => Libros::find()->where(['usuario_id' => $u]),
+        $dataProvider = new ArrayDataProvider([
+            'query' => Yii::$app->user->identity->libros
         ]);
 
-        return $this->render('', [
+        return $this->render('misLibros', [
             'dataProvider' => $dataProvider,
         ]);
     }
