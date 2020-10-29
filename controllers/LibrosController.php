@@ -40,7 +40,7 @@ class LibrosController extends Controller
                         'allow' => true,
                         'actions' => ['update', 'delete'],
                         'matchCallback' => function ($rule, $action) {
-                            return true;
+                            return (!Yii::$app->user->isGuest && Yii::$app->user->identity->id === 1);
                         }
                     ]
                 ],

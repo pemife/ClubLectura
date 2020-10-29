@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
  */
 class UsuariosController extends Controller
 {
+    const MAX_LIBROS = 5;
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +30,51 @@ class UsuariosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => [
+                    'mis-libros', 'anadir-libro'
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['mis-libros'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                Yii::$app->session->setFlash('error', '¡No puedes ver tu lista de libros sin iniciar sesión!');
+                                return false;
+                            }
+
+                            return true;
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['anadir-libro'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                Yii::$app->session->setFlash('error', '¡No puedes añadir nada a tu lista de libros sin iniciar sesión!');
+                                return false;
+                            }
+
+                            $l = Yii::$app->request->queryParams['l'];
+
+                            if (Yii::$app->user->identity->libros->length > self::MAX_LIBROS) {
+                                Yii::$app->session->setFlash('error', '¡No puedes añadr más de ' + self::MAX_LIBROS + ' libros a tu lista');
+                                return false;
+                            }
+
+                            // TODO
+                            if (!Libros::findOne($l)) {
+                                Yii::$app->session->setFlash('error', '¡No puedes añadir a tu lista un libro que no existe!');
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -118,16 +165,27 @@ class UsuariosController extends Controller
      * @param Integer $u    Id del usuario del que queremos ver la lista
      * @return mixed
      */
-    public function actionMisLibros($u)
+    public function actionMisLibros()
     {
-        // TODO
         $dataProvider = new ArrayDataProvider([
-            'query' => Yii::$app->user->identity->libros
+            'models' => Yii::$app->user->identity->libros
         ]);
 
         return $this->render('misLibros', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * Función que un usuario usará para añadir un libro a su lista
+     *
+     * @param int $l    Id del libro a añadir
+     * @return void
+     */
+    public function actionAnadirLibro($l)
+    {
+        $this->findModel(Yii::$app->user->identity->id)->link('Libros', Libros::findOne($l));
+        return true;
     }
 
     /**
