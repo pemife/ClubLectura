@@ -21,20 +21,54 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'titulo',
             'autor',
             'editorial',
             'isbn',
-            //'fecha_publicacion',
-            //'fecha_1a_edicion',
-            //'descripcion:ntext',
-            //'n_paginas',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {anadir}',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        if (Yii::$app->user->isGuest || Yii::$app->user->identity->id != 1) {
+                            return '';
+                        }
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        if (Yii::$app->user->isGuest || Yii::$app->user->identity->id != 1) {
+                            return '';
+                        }
+                        return Html::a(
+                            '',
+                            ['update', 'id' => $model->id],
+                            [
+                                'class' => 'fas fa-edit'
+                            ]
+                        );
+                    },
+                    'anadir' => function ($url, $model, $key) {
+                        if (Yii::$app->user->isGuest) {
+                            return '';
+                        }
+                        return Html::a(
+                            '',
+                            [
+                                '/usuarios/anadir-libro',
+                                'id' => $model->id
+                            ],
+                            [
+                                'class' => 'fas fa-plus',
+                                'title' => 'Añadir libro a tu lista',
+                                'style' => [
+                                    'color' => 'LimeGreen',
+                                ],
+                            ]
+                        );
+                    },
+                ]
+            ],
+        ]
     ]); ?>
 
 
