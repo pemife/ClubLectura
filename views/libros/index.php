@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             '',
                             [
                                 '/usuarios/anadir-libro',
-                                'id' => $model->id
+                                'l' => $model->id
                             ],
                             [
                                 'class' => 'fas fa-plus',

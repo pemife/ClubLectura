@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "seleccion".
+ * Esta es la clase modelo para la tabla seleccion
  *
  * @property float $orden
  * @property int $usuario_id
@@ -45,5 +45,25 @@ class Seleccion extends \yii\db\ActiveRecord
             'usuario_id' => 'Usuario ID',
             'libro_id' => 'Libro ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Libros]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLibro()
+    {
+        return $this->hasOne(Libros::class, ['id' => 'libro_id']);
+    }
+
+    /**
+     * Gets query for [[Usuarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuarios::class, ['id' => 'usuario_id']);
     }
 }

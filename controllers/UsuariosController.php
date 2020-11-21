@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Libros;
+use app\models\Seleccion;
 use Yii;
 use app\models\Usuarios;
 use yii\data\ActiveDataProvider;
@@ -11,6 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -60,14 +62,47 @@ class UsuariosController extends Controller
 
                             $l = Yii::$app->request->queryParams['l'];
 
-                            if (Yii::$app->user->identity->libros->length > self::MAX_LIBROS) {
-                                Yii::$app->session->setFlash('error', '¡No puedes añadr más de ' + self::MAX_LIBROS + ' libros a tu lista');
+                            if (sizeof(Yii::$app->user->identity->libros) >= self::MAX_LIBROS) {
+                                Yii::$app->session->setFlash('error', '¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!');
                                 return false;
                             }
 
-                            // TODO
                             if (!Libros::findOne($l)) {
                                 Yii::$app->session->setFlash('error', '¡No puedes añadir a tu lista un libro que no existe!');
+                                return false;
+                            }
+
+                            if (in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
+                                Yii::$app->session->setFlash('error', '¡No puedes añadir a tu lista un libro dos veces!');
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['borrar-libro'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                Yii::$app->session->setFlash('error', '¡No puedes borrar nada de tu lista de libros sin iniciar sesión!');
+                                return false;
+                            }
+
+                            $l = Yii::$app->request->queryParams['l'];
+
+                            if (sizeof(Yii::$app->user->identity->libros) < 1) {
+                                Yii::$app->session->setFlash('error', '¡No puedes borrar nada de una lista de libros que está vacía!');
+                                return false;
+                            }
+
+                            if (!Libros::findOne($l)) {
+                                Yii::$app->session->setFlash('error', '¡No puedes borrar de tu lista un libro que no existe!');
+                                return false;
+                            }
+
+                            if (!in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
+                                Yii::$app->session->setFlash('error', '¡No puedes borrar de tu lista un libro que no está en ella!');
                                 return false;
                             }
 
@@ -168,8 +203,10 @@ class UsuariosController extends Controller
      */
     public function actionMisLibros()
     {
-        $dataProvider = new ArrayDataProvider([
-            'models' => Yii::$app->user->identity->libros
+        $dataProvider = new ActiveDataProvider([
+            'query' => Seleccion::find()
+                ->where(['usuario_id' => Yii::$app->user->identity->id])
+                ->orderBy('orden'),
         ]);
 
         return $this->render('misLibros', [
@@ -185,8 +222,31 @@ class UsuariosController extends Controller
      */
     public function actionAnadirLibro($l)
     {
-        $this->findModel(Yii::$app->user->identity->id)->link('Libros', Libros::findOne($l));
-        return true;
+        $orden = sizeof(Yii::$app->user->identity->libros) + 1;
+        $this->findModel(Yii::$app->user->identity->id)->link('libros', Libros::findOne($l), ['orden' => $orden]);
+        $mensaje = '¡Se ha añadido el libro a tu lista correctamente!';
+        if (Yii::$app->request->isAjax) {
+            return Json::encode($mensaje);
+        }
+        Yii::$app->session->setFlash('success', $mensaje);
+        return $this->redirect(['mis-libros']);
+    }
+
+    /**
+     * Función que un usuario usará para borrar un libro de su lista
+     *
+     * @param int $l    Id del libro a borrar
+     * @return void
+     */
+    public function actionBorrarLibro($l)
+    {
+        $this->findModel(Yii::$app->user->identity->id)->unlink('libros', Libros::findOne($l), true);
+        $mensaje = '¡Se ha borrado el libro de tu lista correctamente!';
+        if (Yii::$app->request->isAjax) {
+            return Json::encode($mensaje);
+        }
+        Yii::$app->session->setFlash('success', $mensaje);
+        return $this->redirect(['mis-libros']);
     }
 
     /**
