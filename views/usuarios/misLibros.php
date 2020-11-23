@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Yii::debug($dataProvider) ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

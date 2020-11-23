@@ -36,7 +36,7 @@ class UsuariosController extends Controller
             'access' => [
                 'class' => AccessControl::class,
                 'only' => [
-                    'mis-libros', 'anadir-libro'
+                    'mis-libros', 'anadir-libro', 'borrar-libro'
                 ],
                 'rules' => [
                     [
