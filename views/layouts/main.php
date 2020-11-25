@@ -28,6 +28,12 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    $usuarioNombre = '';
+    $usuarioId = '';
+    if (!Yii::$app->user->isGuest) {
+        $usuarioNombre = Yii::$app->user->identity->nombre;
+        $usuarioId = Yii::$app->user->identity->id;
+    }
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -41,21 +47,26 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li class="nav-item">'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-dark nav-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['label' => 'Calendario', 'url' => ['/libros/calendario']],
+            ['label' => 'Libros', 'url' => ['/libros/index']],
+            ['label' => 'Películas', 'url' => ['/peliculas/index']],
+            ['label' => 'Login', 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
+            ['label' => 'Registrar', 'url' => ['/usuarios/create'], 'visible' => Yii::$app->user->isGuest],
+            [
+                'label' => $usuarioNombre,
+                'items' => [
+                    ['label' => 'Libros propuestos', 'url' => ['/usuarios/mis-libros']],
+                    ['label' => 'Ver perfil', 'url' => ['usuarios/view', 'id' => Yii::$app->user->id]],
+                    ['label' => 'Modificar perfil', 'url' => ['usuarios/update', 'id' => Yii::$app->user->id]],
+                    ['label' => 'Añadir a inventario', 'url' => ['usuarios/anadir-inventario']],
+                    Html::beginForm(['site/logout'], 'post')
+                    . Html::submitButton(
+                        '&nbsp;&nbsp;Logout (' . Html::encode($usuarioNombre) . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()],
+                    'visible' => !Yii::$app->user->isGuest
+            ]
         ],
     ]);
     NavBar::end();
