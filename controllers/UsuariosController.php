@@ -225,6 +225,7 @@ class UsuariosController extends Controller
         $orden = sizeof(Yii::$app->user->identity->libros) + 1;
         $this->findModel(Yii::$app->user->identity->id)->link('libros', Libros::findOne($l), ['orden' => $orden]);
         $mensaje = '¡Se ha añadido el libro a tu lista correctamente!';
+        $this->reordenarListaLibros(Yii::$app->user->identity->id);
         if (Yii::$app->request->isAjax) {
             return Json::encode($mensaje);
         }
@@ -242,6 +243,7 @@ class UsuariosController extends Controller
     {
         $this->findModel(Yii::$app->user->identity->id)->unlink('libros', Libros::findOne($l), true);
         $mensaje = '¡Se ha borrado el libro de tu lista correctamente!';
+        $this->reordenarListaLibros(Yii::$app->user->identity->id);
         if (Yii::$app->request->isAjax) {
             return Json::encode($mensaje);
         }
@@ -249,9 +251,23 @@ class UsuariosController extends Controller
         return $this->redirect(['mis-libros']);
     }
 
-    private function reordenarListaLibros()
+    /**
+     * Función que solo se le llama desde borrar/añadir Libro, que corrije
+     * el orden en la lista de libros por usuario
+     *
+     * @param int $uId
+     * @return void
+     */
+    private function reordenarListaLibros($uId)
     {
-        //TODO
+        $listaLibros = Seleccion::find()->where(['usuario_id' => $uId])->orderBy('orden')->all();
+
+        $i = 1;
+        foreach ($listaLibros as $libro) {
+            $libro->orden = $i;
+            $i++;
+            $libro->save();
+        }
     }
 
     /**
