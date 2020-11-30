@@ -62,21 +62,6 @@ class UsuariosController extends Controller
 
                             $l = Yii::$app->request->queryParams['l'];
 
-                            if (sizeof(Yii::$app->user->identity->libros) >= self::MAX_LIBROS) {
-                                Yii::$app->session->setFlash('error', '¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!');
-                                return false;
-                            }
-
-                            if (!Libros::findOne($l)) {
-                                Yii::$app->session->setFlash('error', '¡No puedes añadir a tu lista un libro que no existe!');
-                                return false;
-                            }
-
-                            if (in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
-                                Yii::$app->session->setFlash('error', '¡No puedes añadir a tu lista un libro dos veces!');
-                                return false;
-                            }
-
                             return true;
                         }
                     ],
@@ -222,13 +207,24 @@ class UsuariosController extends Controller
      */
     public function actionAnadirLibro($l)
     {
+
+        if (sizeof(Yii::$app->user->identity->libros) >= self::MAX_LIBROS) {
+            return $this->devolverError('¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!');
+        }
+
+        if (!Libros::findOne($l)) {
+            return $this->devolverError('¡No puedes añadir a tu lista un libro que no existe!');
+        }
+
+        if (in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
+            return $this->devolverError( '¡No puedes añadir a tu lista un libro dos veces!');
+        }
+
         $orden = sizeof(Yii::$app->user->identity->libros) + 1;
         $this->findModel(Yii::$app->user->identity->id)->link('libros', Libros::findOne($l), ['orden' => $orden]);
         $mensaje = '¡Se ha añadido el libro a tu lista correctamente!';
         $this->reordenarListaLibros(Yii::$app->user->identity->id);
-        if (Yii::$app->request->isAjax) {
-            return Json::encode($mensaje);
-        }
+
         Yii::$app->session->setFlash('success', $mensaje);
         return $this->redirect(['mis-libros']);
     }
@@ -284,5 +280,20 @@ class UsuariosController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Funcion que devuelve un error en casos concretos
+     *
+     * @param String $mensaje
+     * @return mixed
+     */
+    private function devolverError ($mensaje)
+    {
+        if (Yii::$app->request->isAjax) {
+            return Json::encode($mensaje);
+        }
+        Yii::$app->session->setFlash('error', $mensaje);
+        return $this->redirect(['mis-libros']);
     }
 }
