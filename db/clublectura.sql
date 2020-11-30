@@ -35,6 +35,7 @@ CREATE TABLE libros
   , fecha_1a_edicion    DATE
   , descripcion         TEXT
   , n_paginas           NUMERIC(4)
+  --, img_key             VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS peliculas CASCADE;
@@ -48,6 +49,7 @@ CREATE TABLE peliculas
   , productores         VARCHAR(255)
   , principales_actores TEXT
   , descripcion         TEXT
+  --, img_key             VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS seleccion CASCADE;
