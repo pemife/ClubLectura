@@ -56,7 +56,7 @@ CREATE TABLE seleccion
 (
     orden               NUMERIC(2)          NOT NULL
   , usuario_id          BIGINT              REFERENCES usuarios(id)
-                                            ON DELETE DELETE
+                                            ON DELETE CASCADE
                                             ON UPDATE CASCADE
   , libro_id            BIGINT              REFERENCES libros(id)
                                             ON DELETE SET NULL
