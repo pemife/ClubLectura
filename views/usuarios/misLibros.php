@@ -87,6 +87,7 @@ $this->registerJS($js);
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
             'itemOptions' => ['class' => 'item'],
+            'summary' => false,
             'itemView' => function ($model, $key, $index, $widget) {
                 ?>
                 <li 
