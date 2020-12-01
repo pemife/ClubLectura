@@ -36,7 +36,7 @@ class UsuariosController extends Controller
             'access' => [
                 'class' => AccessControl::class,
                 'only' => [
-                    'mis-libros', 'anadir-libro', 'borrar-libro'
+                    'mis-libros', 'anadir-libro', 'borrar-libro', 'ordenar-lista-libros'
                 ],
                 'rules' => [
                     [
@@ -93,7 +93,19 @@ class UsuariosController extends Controller
 
                             return true;
                         }
-                    ]
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['ordenar-lista-libros'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (Yii::$app->user->isGuest) {
+                                Yii::$app->session->setFlash('error', '¡No puedes ordenar tu lista de libros sin iniciar sesión!');
+                                return false;
+                            }
+
+                            return true;
+                        },
+                    ],
                 ]
             ]
         ];
@@ -245,6 +257,39 @@ class UsuariosController extends Controller
         }
         Yii::$app->session->setFlash('success', $mensaje);
         return $this->redirect(['mis-libros']);
+    }
+
+
+    public function actionOrdenarListaLibros()
+    {
+        $post = Yii::$app->request->post();
+        $uId = $post['uId'];
+        $nO = $post['nO'];
+
+        $propuestos = Seleccion::find()
+        ->where(['usuario_id' => $uId])
+        ->orderBy('orden')
+        ->all();
+
+        if (!$propuestos || (count($propuestos) != (count($nO)))) {
+            Yii::debug('el usuario no tiene deseos o los arrays no coinciden');
+            return false;
+        }
+
+        for ($i = 0; $i < count($propuestos); $i++) {
+            for ($j = 0; $j < count($nO); $j++) {
+                if ($propuestos[$i]->libro->id == $nO[$j]) {
+                    $libroSel = $propuestos[$i];
+                    $libroSel->orden = $j+1;
+                    if (!$libroSel->save()) {
+                        Yii::$app->session->setFlash('error', 'Ha ocurrido un error actualizando el orden de tu lista de libros');
+                        return $this->redirect(['mis-libros']);
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
