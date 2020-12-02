@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Libros;
+use app\models\Seleccion;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -29,7 +30,7 @@ class LibrosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['create', 'update', 'delete'],
+                'only' => ['create', 'update', 'delete', 'seleccion'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -41,6 +42,22 @@ class LibrosController extends Controller
                         'actions' => ['update', 'delete'],
                         'matchCallback' => function ($rule, $action) {
                             return (!Yii::$app->user->isGuest && Yii::$app->user->identity->id === 1);
+                        }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['seleccion'],
+                        'matchCallback' => function ($rule, $action) {
+
+                            if (Yii::$app->user->isGuest){
+                                Yii::$app->session->setFlash('error', 'No puedes acceder a la selección de libro sin iniciar sesión');
+                                return false;
+                            }
+
+                            // Tenemos que ver si quiero que la seleccion solo la haga el admin
+                            // o si queremos que el responsable de la rotacion sea el que haga la seleccion.
+
+                            return true;
                         }
                     ]
                 ],
@@ -137,7 +154,17 @@ class LibrosController extends Controller
      */
     public function actionSeleccion()
     {
-        return $this->render('seleccion');
+        $query = Seleccion::find()->orderBy('usuario_id');
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        //TODO: todo lo relacionado con la seleccion de libro
+
+        return $this->render('seleccion', [
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /**
