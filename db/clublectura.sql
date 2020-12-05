@@ -35,7 +35,7 @@ CREATE TABLE libros
   , fecha_1a_edicion    DATE
   , descripcion         TEXT
   , n_paginas           NUMERIC(4)
-  --, img_key             VARCHAR(255)
+  , img_key             VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS peliculas CASCADE;
@@ -61,9 +61,11 @@ CREATE TABLE seleccion
                                             ON DELETE CASCADE
                                             ON UPDATE CASCADE
   , libro_id            BIGINT              REFERENCES libros(id)
+                                            
                                             ON DELETE SET NULL
                                             ON UPDATE CASCADE
   , PRIMARY KEY(usuario_id, libro_id)
+  , CONSTRAINT uq_seleccion_libro  UNIQUE (libro_id)
 );
 
 DROP TABLE IF EXISTS criticas CASCADE;

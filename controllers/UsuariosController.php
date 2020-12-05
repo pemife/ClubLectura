@@ -54,16 +54,15 @@ class UsuariosController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['anadir-libro'],
-                        'matchCallback' => function ($rule, $action) {
-                            if (Yii::$app->user->isGuest) {
-                                Yii::$app->session->setFlash('error', '¡No puedes añadir nada a tu lista de libros sin iniciar sesión!');
-                                return false;
-                            }
+                        'roles' => ['@']
+                        // 'matchCallback' => function ($rule, $action) {
+                        //     if (Yii::$app->user->isGuest) {
+                        //         Yii::$app->session->setFlash('error', '¡No puedes añadir nada a tu lista de libros sin iniciar sesión!');
+                        //         return false;
+                        //     }
 
-                            $l = Yii::$app->request->queryParams['l'];
-
-                            return true;
-                        }
+                        //     return !Yii::$app->user->isGuest;
+                        // }
                     ],
                     [
                         'allow' => true,
@@ -216,29 +215,28 @@ class UsuariosController extends Controller
      *
      * @param int $l    Id del libro a añadir
      * @return void
+     * @throws yii\base\InvalidCallException    Si los modelos no se pueden enlazar
      */
     public function actionAnadirLibro($l)
     {
 
         if (sizeof(Yii::$app->user->identity->libros) >= self::MAX_LIBROS) {
-            return $this->devolverError('¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!');
+            return $this->devolverMensaje('¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!', 'error');
         }
 
         if (!Libros::findOne($l)) {
-            return $this->devolverError('¡No puedes añadir a tu lista un libro que no existe!');
+            return $this->devolverMensaje('¡No puedes añadir a tu lista un libro que no existe!', 'error');
         }
 
         if (in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
-            return $this->devolverError( '¡No puedes añadir a tu lista un libro dos veces!');
+            return $this->devolverMensaje('¡No puedes añadir a tu lista un libro dos veces!', 'error');
         }
 
         $orden = sizeof(Yii::$app->user->identity->libros) + 1;
-        $this->findModel(Yii::$app->user->identity->id)->link('libros', Libros::findOne($l), ['orden' => $orden]);
-        $mensaje = '¡Se ha añadido el libro a tu lista correctamente!';
+        Yii::$app->user->identity->link('libros', Libros::findOne($l), ['orden' => $orden]);
         $this->reordenarListaLibros(Yii::$app->user->identity->id);
 
-        Yii::$app->session->setFlash('success', $mensaje);
-        return $this->redirect(['mis-libros']);
+        return $this->devolverMensaje('¡Se ha añadido el libro a tu lista correctamente!', 'success');
     }
 
     /**
@@ -246,17 +244,14 @@ class UsuariosController extends Controller
      *
      * @param int $l    Id del libro a borrar
      * @return void
+     * @throws yii\base\InvalidCallException    Si los modelos no se pueden desenlazar
      */
     public function actionBorrarLibro($l)
     {
         $this->findModel(Yii::$app->user->identity->id)->unlink('libros', Libros::findOne($l), true);
-        $mensaje = '¡Se ha borrado el libro de tu lista correctamente!';
         $this->reordenarListaLibros(Yii::$app->user->identity->id);
-        if (Yii::$app->request->isAjax) {
-            return Json::encode($mensaje);
-        }
-        Yii::$app->session->setFlash('success', $mensaje);
-        return $this->redirect(['mis-libros']);
+
+        return $this->devolverMensaje('¡Se ha borrado el libro de tu lista correctamente!', 'success');
     }
 
 
@@ -282,8 +277,7 @@ class UsuariosController extends Controller
                     $libroSel = $propuestos[$i];
                     $libroSel->orden = $j+1;
                     if (!$libroSel->save()) {
-                        Yii::$app->session->setFlash('error', 'Ha ocurrido un error actualizando el orden de tu lista de libros');
-                        return $this->redirect(['mis-libros']);
+                        return $this->devolverMensaje('Ha ocurrido un error actualizando el orden de tu lista de libros', 'error');
                     }
                 }
             }
@@ -328,17 +322,18 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Funcion que devuelve un error en casos concretos
+     * Funcion que devuelve un mensaje en casos concretos
      *
      * @param String $mensaje
      * @return mixed
      */
-    private function devolverError ($mensaje)
+    private function devolverMensaje ($mensaje, $tipo)
     {
         if (Yii::$app->request->isAjax) {
             return Json::encode($mensaje);
         }
-        Yii::$app->session->setFlash('error', $mensaje);
+
+        Yii::$app->session->setFlash($tipo, $mensaje);
         return $this->redirect(['mis-libros']);
     }
 }
