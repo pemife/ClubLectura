@@ -73,12 +73,12 @@ class UsuariosController extends Controller
                                 return false;
                             }
 
-                            $l = Yii::$app->request->queryParams['l'];
-
                             if (sizeof(Yii::$app->user->identity->libros) < 1) {
                                 Yii::$app->session->setFlash('error', '¡No puedes borrar nada de una lista de libros que está vacía!');
                                 return false;
                             }
+
+                            $l = Yii::$app->request->queryParams['l'];
 
                             if (!Libros::findOne($l)) {
                                 Yii::$app->session->setFlash('error', '¡No puedes borrar de tu lista un libro que no existe!');
@@ -219,7 +219,6 @@ class UsuariosController extends Controller
      */
     public function actionAnadirLibro($l)
     {
-
         if (sizeof(Yii::$app->user->identity->libros) >= self::MAX_LIBROS) {
             return $this->devolverMensaje('¡No puedes añadir más de ' . self::MAX_LIBROS . ' libros a tu lista!', 'error');
         }
@@ -232,6 +231,8 @@ class UsuariosController extends Controller
             return $this->devolverMensaje('¡No puedes añadir a tu lista un libro dos veces!', 'error');
         }
 
+        // TODO: Cambiar link() y unlink por un modelo nuevo de Seleccion
+        // para implementar las reglas de validación del modelo
         $orden = sizeof(Yii::$app->user->identity->libros) + 1;
         Yii::$app->user->identity->link('libros', Libros::findOne($l), ['orden' => $orden]);
         $this->reordenarListaLibros(Yii::$app->user->identity->id);
@@ -248,7 +249,9 @@ class UsuariosController extends Controller
      */
     public function actionBorrarLibro($l)
     {
-        $this->findModel(Yii::$app->user->identity->id)->unlink('libros', Libros::findOne($l), true);
+        // TODO: Cambiar link() y unlink por un modelo nuevo de Seleccion
+        // para implementar las reglas de validación del modelo
+        Yii::$app->user->identity->unlink('libros', Libros::findOne($l), true);
         $this->reordenarListaLibros(Yii::$app->user->identity->id);
 
         return $this->devolverMensaje('¡Se ha borrado el libro de tu lista correctamente!', 'success');

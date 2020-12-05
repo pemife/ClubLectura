@@ -29,9 +29,9 @@ class Seleccion extends \yii\db\ActiveRecord
         return [
             [['orden', 'usuario_id', 'libro_id'], 'required'],
             [['orden'], 'number'],
+            [['libro_id'], 'unique'],
             [['usuario_id', 'libro_id'], 'default', 'value' => null],
-            [['usuario_id', 'libro_id'], 'integer'],
-            [['usuario_id', 'libro_id'], 'unique', 'targetAttribute' => ['usuario_id', 'libro_id']],
+            [['usuario_id', 'libro_id'], 'integer']
         ];
     }
 
