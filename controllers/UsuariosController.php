@@ -85,7 +85,7 @@ class UsuariosController extends Controller
                                 return false;
                             }
 
-                            if (!in_array(Libros::findOne($l), Yii::$app->user->identity->libros)) {
+                            if (!Seleccion::findOne(['usuario_id' => Yii::$app->user->identity->id, 'libro_id' => $l])) {
                                 Yii::$app->session->setFlash('error', '¡No puedes borrar de tu lista un libro que no está en ella!');
                                 return false;
                             }
@@ -215,7 +215,6 @@ class UsuariosController extends Controller
      *
      * @param int $l    Id del libro a añadir
      * @return void
-     * @throws yii\base\InvalidCallException    Si los modelos no se pueden enlazar
      */
     public function actionAnadirLibro($l)
     {
@@ -231,13 +230,20 @@ class UsuariosController extends Controller
             return $this->devolverMensaje('¡No puedes añadir a tu lista un libro dos veces!', 'error');
         }
 
-        // TODO: Cambiar link() y unlink por un modelo nuevo de Seleccion
-        // para implementar las reglas de validación del modelo
         $orden = sizeof(Yii::$app->user->identity->libros) + 1;
-        Yii::$app->user->identity->link('libros', Libros::findOne($l), ['orden' => $orden]);
-        $this->reordenarListaLibros(Yii::$app->user->identity->id);
 
-        return $this->devolverMensaje('¡Se ha añadido el libro a tu lista correctamente!', 'success');
+        $libroSeleccionado = new Seleccion([
+            'usuario_id' => Yii::$app->user->identity->id,
+            'libro_id' => $l,
+            'orden' => $orden,
+        ]);
+
+        if ($libroSeleccionado->save()) {
+            $this->reordenarListaLibros(Yii::$app->user->identity->id);
+            return $this->devolverMensaje('¡Se ha añadido el libro a tu lista correctamente!', 'success');
+        }
+        
+        return $this->devolverMensaje('Ha ocurrido un error al añadir el libro', 'error');
     }
 
     /**

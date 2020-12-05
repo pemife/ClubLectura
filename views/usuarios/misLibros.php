@@ -108,8 +108,19 @@ $this->registerJS($js);
                         <div class="col-md-3">
                             <img src="" width="150" height="125">
                         </div>
-                        <div class="col-md-7">
-                            
+                        <div class="col-md-6">
+                            <p style="text-align:center"><?= $model->libro->descripcion ? $model->libro->descripcion : '<< sin descripción >>' ?></p>
+                        </div>
+                        <div class="col-md-1">
+                            <?= Html::a('', 'javascript:void(0)', [
+                                'class' => 'fas fa-trash',
+                                'name' => 'botonBorrar',
+                                'title' => 'Borrar de tu lista',
+                                'data-confirm' => '¿Quieres borrar este libro de tu lista?',
+                                'style' => [
+                                    'color' => 'red'
+                                ]
+                            ]) ?>
                         </div>
                     </div>
                     <div class="col-md-12"><hr></div>
