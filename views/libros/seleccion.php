@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="libros-seleccion">
 
     <?= ListView::widget([
-        'dataprovider' => $dataProvider,
+        'dataProvider' => $dataProvider,
         'summary' => false,
-        'itemview' => function ($model, $key, $index, $widget) {
+        'itemView' => function ($model, $key, $index, $widget) { ?>
             
-        }
+        <?php }
     ]); ?>
 
 </div>

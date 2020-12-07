@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Libros;
 use app\models\Seleccion;
+use app\models\Usuarios;
+use yii\data\ActiveDataFilter;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -154,16 +156,18 @@ class LibrosController extends Controller
      */
     public function actionSeleccion()
     {
-        $query = Seleccion::find()->orderBy('usuario_id');
-        
+        $query = Usuarios::find()
+        ->select(['count(usuario.id) as cnt'])
+        ->joinWith('libros')
+        ->groupBy('usuario.id')
+        ->andHaving('cnt = 5');
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        //TODO: todo lo relacionado con la seleccion de libro
-
         return $this->render('seleccion', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 

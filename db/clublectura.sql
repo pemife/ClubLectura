@@ -142,7 +142,7 @@ CREATE TABLE libro_usuario
 INSERT INTO usuarios (nombre, password, email, fechanac)
 VALUES ('admin', crypt('hnmpl', gen_salt('bf', 10)), 'gamesandfriends2@gmail.com', '1987-01-01'),
 ('pepe', crypt('pepe', gen_salt('bf', 10)), 'jose.millan@iesdonana.org', '1995-12-03'),
-('cristina', crypt('cristina', gen_salt('bf', 10)), 'crimaroli90@gmail.com', '1990-11-16');
+('potaita', crypt('potaita', gen_salt('bf', 10)), 'astutapotaita@gmail.com', '1990-11-16');
 
 INSERT INTO libros (titulo, autor, editorial, isbn, fecha_publicacion, fecha_1a_edicion, descripcion, n_paginas)
 VALUES ('La historia interminable', 'Michael Ende', 'Santillana', 9788491220787, '2016-1-1', '1979-1-1', null, 256),
