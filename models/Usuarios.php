@@ -195,4 +195,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         }
         return true;
     }
+
+    /**
+     * Esta función dirá si el usuario participa o no en la selección de libro
+     *
+     * @return bool
+     */
+    public function participaEnSeleccion()
+    {
+        return $this->libros->count == 5;
+    }
 }

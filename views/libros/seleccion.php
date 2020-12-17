@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'summary' => false,
         'itemView' => function ($model, $key, $index, $widget) { ?>
-            
+            <?= $model ?>
         <?php }
     ]); ?>
 

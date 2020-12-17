@@ -66,4 +66,9 @@ class Seleccion extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Usuarios::class, ['id' => 'usuario_id']);
     }
+
+    public function getParticipantes()
+    {
+        //TODO
+    }
 }

@@ -156,11 +156,14 @@ class LibrosController extends Controller
      */
     public function actionSeleccion()
     {
-        $query = Usuarios::find()
-        ->select(['count(usuario.id) as cnt'])
-        ->joinWith('libros')
-        ->groupBy('usuario.id')
-        ->andHaving('cnt = 5');
+        // Quiero tener todos los libros de seleccion ordenados por usuario
+        // y quiero representarlos con una tabla de 5 libros para cada usuario
+        // pero quiero excluir aquellos usuarios que no tengan 5 libros en su selección
+
+        $query = Seleccion::find()
+        ->with('ususario')
+        ->orderBy('usuario_id')
+        ->where([]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
