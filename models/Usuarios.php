@@ -205,4 +205,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->libros->count == 5;
     }
+
+    public function participantesId()
+    {
+        $pIds = [];
+        
+        foreach ($usuario in $this->findAll()) {
+            
+        }
+    }
 }

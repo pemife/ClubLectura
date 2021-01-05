@@ -161,7 +161,7 @@ class LibrosController extends Controller
         // pero quiero excluir aquellos usuarios que no tengan 5 libros en su selección
 
         $query = Seleccion::find()
-        ->with('ususario')
+        ->with('usuario')
         ->orderBy('usuario_id')
         ->where([]);
 
