@@ -203,15 +203,19 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function participaEnSeleccion()
     {
-        return $this->libros->count == 5;
+        Yii::debug($this->libros, count($this->libros));
+        // return true;
+        return count($this->libros) == 5;
     }
 
-    public function participantesId()
+    public static function participantesId()
     {
         $pIds = [];
         
-        foreach ($usuario in $this->findAll()) {
-            
+        foreach (self::find()->all() as $usuario) {
+            if ($usuario->participaEnSeleccion()) array_push($pIds, $usuario->id);
         }
+
+        return $pIds;
     }
 }

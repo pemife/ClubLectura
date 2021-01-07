@@ -52,7 +52,7 @@ class Seleccion extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLibro()
+    public function getLibros()
     {
         return $this->hasOne(Libros::class, ['id' => 'libro_id']);
     }
@@ -62,13 +62,19 @@ class Seleccion extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getUsuarios()
     {
         return $this->hasOne(Usuarios::class, ['id' => 'usuario_id']);
     }
 
-    public function getParticipantes()
+    public function getParticipantesIds()
     {
-        //TODO
+        //TODO: https://riptutorial.com/yii2/example/22707/active-records-with-sub-queries
+
+        // $query = self::find()
+        // ->select('count(usuario_id)', 'usuario_id')
+        // ->select('usuario_id')
+        // ->groupBy('usuario_id')
+        // ->having(['>=', 'count(usuario_id)', 5]);
     }
 }

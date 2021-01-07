@@ -160,10 +160,11 @@ class LibrosController extends Controller
         // y quiero representarlos con una tabla de 5 libros para cada usuario
         // pero quiero excluir aquellos usuarios que no tengan 5 libros en su selección
 
+        // https://riptutorial.com/yii2/example/22707/active-records-with-sub-queries
         $query = Seleccion::find()
-        ->with('usuario')
+        ->with('usuarios')
         ->orderBy('usuario_id')
-        ->where([]);
+        ->where(['in', 'usuario.id', Usuarios::participantesId()]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
