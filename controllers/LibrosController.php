@@ -160,6 +160,7 @@ class LibrosController extends Controller
         // y quiero representarlos con una tabla de 5 libros para cada usuario
         // pero quiero excluir aquellos usuarios que no tengan 5 libros en su selección
 
+        // select count(usuario_id), usuario_id from seleccion group by usuario_id having count(usuario_id) >= 5;
         // https://riptutorial.com/yii2/example/22707/active-records-with-sub-queries
         $query = Seleccion::find()
         ->with('usuarios')
