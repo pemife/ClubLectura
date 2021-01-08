@@ -13,12 +13,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="libros-seleccion">
 
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'summary' => false,
-        'itemView' => function ($model, $key, $index, $widget) { ?>
-            <p><?= $model ?></p>
-        <?php }
-    ]); ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <table class="table table-striped mt-4">
+    
+        <tr>
+            <th>Libros</th>
+        </tr>
+    
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'summary' => false,
+            'itemView' => function ($model, $key, $index, $widget) { ?>
+                <tr>
+                    <td>
+                        <p><?= $model->libro->titulo ?></p>
+                    </td>
+                </tr>
+            <?php }
+        ]); ?>
+
+    </table>
 
 </div>

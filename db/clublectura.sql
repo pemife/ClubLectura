@@ -147,8 +147,8 @@ VALUES ('admin', crypt('hnmpl', gen_salt('bf', 10)), 'gamesandfriends2@gmail.com
 INSERT INTO libros (titulo, autor, editorial, isbn, fecha_publicacion, fecha_1a_edicion, descripcion, n_paginas)
 VALUES ('La historia interminable', 'Michael Ende', 'Santillana', 9788491220787, '2016-1-1', '1979-1-1', null, 256),
 ('El retrato de Dorian Gray', 'Oscar Wilde', 'Siruela', 9788417860134, '2019-1-1', '1890-6-20', null, 280),
-('Dorian Gray', 'Enrique Corominas', 'Diabolo', 9788415153498, '2015-1-1', '2012-4-1', null, 90),
-('El retrato de Dorian Gray', 'Roy Thomasoscar Wilde', 'Panini', 9788490242414, '2012-1-1', null, null, 160),
+('Dorian Gray (Comic)', 'Enrique Corominas', 'Diabolo', 9788415153498, '2015-1-1', '2012-4-1', null, 90),
+('El retrato de Dorian Gray (Marvel)', 'Roy Thomasoscar Wilde', 'Panini', 9788490242414, '2012-1-1', null, null, 160),
 ('Charlie y la fábrica de chocolate', 'Roald Dahl', 'Santillana', 9788491221166, '2016-1-1', '1964-1-1', null, 240),
 ('El guardián invisible', 'Dolores Redondo', 'Destino', 9788423350995, '2016-1-1', '2012-1-1', null, 432),
 ('Stardust', 'Neil Gaiman', 'Rocabolsillo', 9788496940888, '2010-1-1', '1999-2-1', null, 228);

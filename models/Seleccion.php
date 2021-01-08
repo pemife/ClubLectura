@@ -52,7 +52,7 @@ class Seleccion extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLibros()
+    public function getLibro()
     {
         return $this->hasOne(Libros::class, ['id' => 'libro_id']);
     }
@@ -62,7 +62,7 @@ class Seleccion extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    public function getUsuario()
     {
         return $this->hasOne(Usuarios::class, ['id' => 'usuario_id']);
     }
@@ -75,6 +75,6 @@ class Seleccion extends \yii\db\ActiveRecord
         // ->select('count(usuario_id)', 'usuario_id')
         // ->select('usuario_id')
         // ->groupBy('usuario_id')
-        // ->having(['>=', 'count(usuario_id)', 5]);
+        // ->having(['=', 'count(usuario_id)', 5]);
     }
 }
