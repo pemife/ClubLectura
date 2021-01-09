@@ -77,8 +77,12 @@ class LibrosController extends Controller
             'query' => Libros::find(),
         ]);
 
+        $selecsId = Seleccion::find()->select('libro_id')->asArray()->all();
+        $selecsId = array_values($selecsId);
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'selecsId' => $selecsId,
         ]);
     }
 

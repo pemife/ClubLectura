@@ -49,6 +49,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Calendario', 'url' => ['/libros/calendario']],
             ['label' => 'Libros', 'url' => ['/libros/index']],
+            ['label' => 'Selección', 'url' => ['libros/seleccion/'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Películas', 'url' => ['/peliculas/index']],
             ['label' => 'Login', 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
             ['label' => 'Registrar', 'url' => ['/usuarios/create'], 'visible' => Yii::$app->user->isGuest],
