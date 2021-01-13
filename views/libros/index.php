@@ -10,7 +10,7 @@ use yii\helpers\Url;
 $this->title = 'Libros';
 $this->params['breadcrumbs'][] = $this->title;
 
-Yii::debug($selecsId);
+//Yii::debug($selecsId);
 
 $url = Url::to(['usuarios/anadir-libro']);
 
@@ -78,7 +78,7 @@ $this->registerJS($js);
                     'anadir' => function ($url, $model, $key) {
                         if (Yii::$app->user->isGuest) return '';
 
-                        if (in_array($model->id, $selecsId)) return '';
+                        //if (in_array($model->id, $selecsId)) return '';
 
                         return Html::a(
                             '',
