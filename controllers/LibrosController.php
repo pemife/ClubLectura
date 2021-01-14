@@ -58,6 +58,7 @@ class LibrosController extends Controller
 
                             // Tenemos que ver si quiero que la seleccion solo la haga el admin
                             // o si queremos que el responsable de la rotacion sea el que haga la seleccion.
+                            // (al final la selección lo hará quien tenga permisos de "selector" como variable en el modelo de usuario)
 
                             return true;
                         }
@@ -77,11 +78,12 @@ class LibrosController extends Controller
             'query' => Libros::find(),
         ]);
 
-        $selecsId = Seleccion::find()->select('libro_id')->column();
+        //Query para tener un array de ids de libros seleccionados
+        //$selecsId = Seleccion::find()->select('libro_id')->column();
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'selecsId' => $selecsId,
+            //'selecsId' => $selecsId,
         ]);
     }
 

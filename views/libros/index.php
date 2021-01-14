@@ -78,8 +78,6 @@ $this->registerJS($js);
                     'anadir' => function ($url, $model, $key) {
                         if (Yii::$app->user->isGuest) return '';
 
-                        //if (in_array($model->id, $selecsId)) return '';
-
                         return Html::a(
                             '',
                             'javascript:void(0)',
