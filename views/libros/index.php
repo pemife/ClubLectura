@@ -10,8 +10,6 @@ use yii\helpers\Url;
 $this->title = 'Libros';
 $this->params['breadcrumbs'][] = $this->title;
 
-//Yii::debug($selecsId);
-
 $url = Url::to(['usuarios/anadir-libro']);
 
 $js = <<<SCRIPT
