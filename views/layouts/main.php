@@ -59,7 +59,6 @@ AppAsset::register($this);
                     ['label' => 'Libros propuestos', 'url' => ['/usuarios/mis-libros']],
                     ['label' => 'Ver perfil', 'url' => ['usuarios/view', 'id' => Yii::$app->user->id]],
                     ['label' => 'Modificar perfil', 'url' => ['usuarios/update', 'id' => Yii::$app->user->id]],
-                    ['label' => 'Añadir a inventario', 'url' => ['usuarios/anadir-inventario']],
                     Html::beginForm(['site/logout'], 'post')
                     . Html::submitButton(
                         '&nbsp;&nbsp;Logout (' . Html::encode($usuarioNombre) . ')',
